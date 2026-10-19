@@ -1,0 +1,74 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_settings",
+  "info": {
+    "singularName": "site-setting",
+    "pluralName": "site-settings",
+    "displayName": "Site Setting"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "legalName": {
+      "type": "string"
+    },
+    "whatsappNumber": {
+      "type": "string",
+      "unique": false
+    },
+    "primaryPhone": {
+      "type": "string"
+    },
+    "secondaryPhone": {
+      "type": "string"
+    },
+    "salesEmail": {
+      "type": "email"
+    },
+    "quoteNotificationEmail": {
+      "type": "email",
+      "private": true,
+      "searchable": false
+    },
+    "kraPin": {
+      "type": "string"
+    },
+    "vatNumber": {
+      "type": "string"
+    },
+    "companyRegNumber": {
+      "type": "email"
+    },
+    "odpcRegNumber": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "openingHours": {
+      "type": "text"
+    },
+    "facebookUrl": {
+      "type": "string"
+    },
+    "instagramUrl": {
+      "type": "string"
+    },
+    "tiktokUrl": {
+      "type": "string"
+    },
+    "linkedInUrl": {
+      "type": "string"
+    },
+    "paymentMethods": {
+      "type": "component",
+      "component": "shared.payment-method",
+      "repeatable": true
+    },
+    "fraudNotice": {
+      "type": "text"
+    }
+  }
+}

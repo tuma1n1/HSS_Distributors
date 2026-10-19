@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "delivery_zones",
+  "info": {
+    "singularName": "delivery-zone",
+    "pluralName": "delivery-zones",
+    "displayName": "Delivery Zone"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "county": {
+      "type": "string"
+    },
+    "wards": {
+      "type": "text"
+    },
+    "minimumOrder": {
+      "type": "decimal"
+    },
+    "deliveryFee": {
+      "type": "decimal"
+    },
+    "freeDeliveryThreshold": {
+      "type": "decimal"
+    },
+    "cutOffTime": {
+      "type": "string"
+    },
+    "estimatedTime": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

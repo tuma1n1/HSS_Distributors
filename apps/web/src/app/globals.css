@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f5f7ec;
+  --color-brand-100: #e8eed2;
+  --color-brand-600: #5b6b2a;
+  --color-brand-700: #4a5822;
+  --color-brand-900: #272f12;
+  --color-gold-400: #e0b93c;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a9871c;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #171717;
+}

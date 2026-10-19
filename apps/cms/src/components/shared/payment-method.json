@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_payment_methods",
+  "info": {
+    "displayName": "payment-method"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "methodType": {
+      "type": "enumeration",
+      "enum": [
+        "paybill",
+        "till",
+        "bank_transfer"
+      ]
+    },
+    "businessNumber": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "accountName": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

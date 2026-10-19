@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "enquiries",
+  "info": {
+    "singularName": "enquiry",
+    "pluralName": "enquiries",
+    "displayName": "Enquiry"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "businessName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "items": {
+      "type": "json",
+      "required": true
+    },
+    "enquiryStatus": {
+      "type": "enumeration",
+      "default": "new",
+      "enum": [
+        "new",
+        "contacted",
+        "quoted",
+        "closed"
+      ]
+    },
+    "internalNotes": {
+      "type": "text"
+    }
+  }
+}

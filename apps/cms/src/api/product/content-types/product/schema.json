@@ -1,0 +1,127 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "sku": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "shortDescription": {
+      "type": "text",
+      "maxLength": 200
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "variant": {
+      "type": "string"
+    },
+    "packSize": {
+      "type": "string"
+    },
+    "unitOfSale": {
+      "type": "enumeration",
+      "enum": [
+        "piece",
+        "carton",
+        "bale",
+        "bag",
+        "tray",
+        "jerrycan"
+      ]
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "vatTreatment": {
+      "type": "enumeration",
+      "default": "unknown",
+      "enum": [
+        "unknown",
+        "standard",
+        "zero_rated",
+        "exempt"
+      ]
+    },
+    "storageType": {
+      "type": "enumeration",
+      "default": "ambient",
+      "enum": [
+        "ambient",
+        "chilled",
+        "frozen"
+      ]
+    },
+    "shelfLifeDays": {
+      "type": "integer"
+    },
+    "stockStatus": {
+      "type": "enumeration",
+      "required": true,
+      "default": "out_of_stock",
+      "enum": [
+        "out_of_stock",
+        "in_stock",
+        "low_stock",
+        "call_to_confirm"
+      ]
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": false
+    },
+    "isNew": {
+      "type": "boolean",
+      "default": false
+    },
+    "internalNotes": {
+      "type": "text",
+      "private": true,
+      "searchable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "brand": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::brand.brand",
+      "inversedBy": "products"
+    }
+  }
+}
