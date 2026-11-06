@@ -8,6 +8,8 @@ export interface SharedPaymentMethod extends Struct.ComponentSchema {
   attributes: {
     accountName: Schema.Attribute.String;
     accountNumber: Schema.Attribute.String;
+    bankName: Schema.Attribute.String;
+    branchName: Schema.Attribute.String;
     businessNumber: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     methodType: Schema.Attribute.Enumeration<

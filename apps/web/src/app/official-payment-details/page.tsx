@@ -13,6 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+const NUMBER_LABEL: Record<string, string> = {
+  paybill: "Paybill number",
+  till: "Till number",
+};
+
 const DEFAULT_NOTICE =
   "HSS Distributors will only ask you to pay to the details on this page, or details we confirm with you directly. If someone asks you to pay anywhere else, do not pay, and contact us.";
 
@@ -40,9 +45,7 @@ export default async function PaymentDetailsPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {methods.map((m) => (
             <article key={m.id} className="rounded-xl border border-neutral-200 p-5">
-              <h2 className="text-lg font-bold">
-                {m.label || (m.type === "bank" ? "Bank transfer" : m.type === "paybill" ? "M-Pesa Paybill" : "M-Pesa Till")}
-              </h2>
+              <h2 className="text-lg font-bold">{m.label}</h2>
               <dl className="mt-3 space-y-2 text-sm">
                 {m.accountName && (
                   <div>
@@ -59,27 +62,21 @@ export default async function PaymentDetailsPage() {
                     </dd>
                   </div>
                 )}
+                {m.businessNumber && (
+                  <div>
+                    <dt className="text-neutral-500">{NUMBER_LABEL[m.methodType ?? ""] ?? "Business number"}</dt>
+                    <dd className="font-medium">{m.businessNumber}</dd>
+                  </div>
+                )}
                 {m.accountNumber && (
                   <div>
                     <dt className="text-neutral-500">Account number</dt>
                     <dd className="font-medium">{m.accountNumber}</dd>
                   </div>
                 )}
-                {m.paybillNumber && (
-                  <div>
-                    <dt className="text-neutral-500">Paybill number</dt>
-                    <dd className="font-medium">{m.paybillNumber}</dd>
-                  </div>
-                )}
-                {m.tillNumber && (
-                  <div>
-                    <dt className="text-neutral-500">Till number</dt>
-                    <dd className="font-medium">{m.tillNumber}</dd>
-                  </div>
-                )}
               </dl>
-              {m.instructions && (
-                <p className="mt-3 whitespace-pre-line text-sm text-neutral-600">{m.instructions}</p>
+              {m.notes && (
+                <p className="mt-3 whitespace-pre-line text-sm text-neutral-600">{m.notes}</p>
               )}
             </article>
           ))}

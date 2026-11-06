@@ -5,7 +5,7 @@ import { submitEnquiry, type EnquiryState } from "@/app/quote/actions";
 import type { QuoteItem } from "@/lib/quote";
 
 const initial: EnquiryState = { ok: false };
-const input = "w-full rounded-lg border border-neutral-300 px-3 py-2";
+const input = "min-h-11 w-full rounded-lg border border-neutral-300 px-3 py-2";
 
 export function EnquiryForm({ items }: { items: QuoteItem[] }) {
   const [state, action, pending] = useActionState(submitEnquiry, initial);

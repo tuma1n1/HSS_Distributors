@@ -23,11 +23,16 @@ export default async function BranchesPage() {
           {branches.map((b) => (
             <article key={b.documentId} className="rounded-xl border border-neutral-200 p-5">
               <h2 className="text-lg font-bold">{b.name}</h2>
-              {b.area && <p className="text-sm text-brand-700">{b.area}</p>}
+              {b.isMainBranch && <p className="text-sm text-brand-700">Main branch</p>}
               {b.address && <p className="mt-3 whitespace-pre-line text-sm">{b.address}</p>}
               {b.phone && (
                 <a href={`tel:${b.phone.replace(/\s+/g, "")}`} className="mt-3 block text-sm hover:underline">
                   {b.phone}
+                </a>
+              )}
+              {b.email && (
+                <a href={`mailto:${b.email}`} className="mt-1 block text-sm hover:underline">
+                  {b.email}
                 </a>
               )}
               {b.openingHours && (

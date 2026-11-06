@@ -30,7 +30,7 @@ export default async function QuoteSentPage({
       )}
       <Link
         href="/catalogue"
-        className="mt-8 inline-block rounded-lg bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
+        className="mt-8 inline-flex min-h-11 items-center justify-center rounded-lg text-center bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
       >
         Back to catalogue
       </Link>

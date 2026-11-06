@@ -74,7 +74,7 @@ export default async function HowToOrderPage() {
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/catalogue"
-          className="rounded-lg bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg text-center bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
         >
           Browse catalogue
         </Link>
@@ -83,7 +83,7 @@ export default async function HowToOrderPage() {
             href={wa}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-gold-500 px-5 py-3 font-semibold text-brand-900 hover:bg-gold-400"
+            className="inline-flex min-h-11 items-center justify-center rounded-lg text-center bg-gold-500 px-5 py-3 font-semibold text-brand-900 hover:bg-gold-400"
           >
             Order on WhatsApp
           </a>

@@ -1,72 +1,57 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductCard } from "@/components/ProductCard";
-import { expandCategorySlugs, getCategories, getProducts } from "@/lib/catalogue";
+import { FilteredProducts } from "@/components/FilteredProducts";
+import { hasUrlState, parseFilters, type RawParams } from "@/lib/facets";
+import { categorySlugs, getAllCategoryProducts, getCategoryBySlug } from "@/lib/shelf";
 
-type Props = { params: Promise<{ category: string }> };
+type P = Promise<{ category: string }>;
+type SP = Promise<RawParams>;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category } = await params;
-  const categories = await getCategories();
-  const found = categories.find((c) => c.slug === category);
-  if (!found) return {};
+const crumb = "inline-flex min-h-11 items-center hover:text-brand-700";
+
+export async function generateMetadata({ params, searchParams }: { params: P; searchParams: SP }): Promise<Metadata> {
+  const { category: slug } = await params;
+  const category = await getCategoryBySlug(slug);
+  if (!category) return {};
   return {
-    title: `${found.name} Wholesale`,
-    description: `Browse ${found.name} at HSS Distributors and request a quote on WhatsApp.`,
-    alternates: { canonical: `/catalogue/${found.slug}` },
+    title: `${category.name} wholesale in Nairobi`,
+    description: `Browse ${category.name} by brand and size at HSS Distributors. Add items to your quote list and send it on WhatsApp.`,
+    alternates: { canonical: `/catalogue/${category.slug}` },
+    robots: hasUrlState(parseFilters(await searchParams)) ? { index: false, follow: true } : undefined,
   };
 }
 
-export default async function CategoryPage({ params }: Props) {
-  const { category } = await params;
-  const categories = await getCategories();
-  const found = categories.find((c) => c.slug === category);
-  if (!found) notFound();
+export default async function CategoryPage({ params, searchParams }: { params: P; searchParams: SP }) {
+  const { category: slug } = await params;
+  const category = await getCategoryBySlug(slug);
+  if (!category) notFound();
 
-  const { data: products } = await getProducts({
-    categorySlugs: expandCategorySlugs(categories, found.slug),
-  });
+  const products = await getAllCategoryProducts(categorySlugs(category));
+  const filters = parseFilters(await searchParams);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8">
-      <p className="text-sm text-neutral-500">
-        <Link href="/catalogue" className="hover:text-brand-700">
-          Catalogue
-        </Link>
-        {found.parent && (
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:py-10">
+      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-x-1.5 text-sm text-neutral-500">
+        <Link href="/catalogue" className={crumb}>Catalogue</Link>
+        {category.parent && (
           <>
-            {" / "}
-            <Link href={`/catalogue/${found.parent.slug}`} className="hover:text-brand-700">
-              {found.parent.name}
-            </Link>
+            <span aria-hidden="true">›</span>
+            <Link href={`/catalogue/${category.parent.slug}`} className={crumb}>{category.parent.name}</Link>
           </>
         )}
-      </p>
-      <h1 className="mt-2 text-2xl font-semibold text-brand-700">{found.name}</h1>
+        <span aria-hidden="true">›</span>
+        <span className="text-neutral-800">{category.name}</span>
+      </nav>
 
-      {(found.children?.length ?? 0) > 0 && (
-        <div className="mt-4 flex flex-wrap gap-2">
-          {found.children!.map((child) => (
-            <Link
-              key={child.slug}
-              href={`/catalogue/${child.slug}`}
-              className="rounded-full border border-brand-600 px-3 py-1 text-sm text-brand-700 hover:bg-brand-50"
-            >
-              {child.name}
-            </Link>
-          ))}
-        </div>
-      )}
+      <h1 className="mt-2 text-3xl font-bold text-brand-900 sm:text-4xl">{category.name}</h1>
 
       {products.length === 0 ? (
-        <p className="mt-10 text-neutral-600">No products in this category yet.</p>
+        <p className="mt-10 rounded-xl border border-dashed border-neutral-300 p-8 text-neutral-600">
+          Nothing is listed here yet. Message us on WhatsApp and we will check availability for you.
+        </p>
       ) : (
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((p) => (
-            <ProductCard key={p.documentId} product={p} />
-          ))}
-        </div>
+        <FilteredProducts products={products} filters={filters} basePath={`/catalogue/${category.slug}`} />
       )}
     </div>
   );

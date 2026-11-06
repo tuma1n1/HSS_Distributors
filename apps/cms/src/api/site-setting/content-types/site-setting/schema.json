@@ -39,7 +39,7 @@
       "type": "string"
     },
     "companyRegNumber": {
-      "type": "email"
+      "type": "string"
     },
     "odpcRegNumber": {
       "type": "string"

@@ -3,7 +3,15 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { HeaderMenuCloser } from "@/components/HeaderMenuCloser";
 import { QuoteProvider } from "@/lib/quote";
+import { Bricolage_Grotesque } from "next/font/google";
+
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
@@ -20,9 +28,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geist.variable} h-full antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${geist.variable} ${display.variable} h-full antialiased`}>
       <QuoteProvider>
         <body className="flex min-h-full flex-col">
+          <HeaderMenuCloser />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

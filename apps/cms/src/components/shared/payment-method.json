@@ -28,6 +28,12 @@
     },
     "notes": {
       "type": "text"
+    },
+    "bankName": {
+      "type": "string"
+    },
+    "branchName": {
+      "type": "string"
     }
   },
   "config": {}

@@ -57,7 +57,7 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
           {items.map((i) => (
             <li key={i.id} className="flex flex-wrap items-center gap-4 p-4">
               <div className="min-w-0 flex-1">
-                <Link href={`/product/${i.slug}`} className="font-semibold hover:text-brand-700">
+                <Link href={`/product/${i.slug}`} className="inline-flex min-h-11 items-center font-semibold hover:text-brand-700">
                   {i.name}
                 </Link>
                 {i.packSize && <p className="text-sm text-neutral-500">{i.packSize}</p>}
@@ -67,7 +67,7 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
                   type="button"
                   aria-label={`Decrease ${i.name}`}
                   onClick={() => setQty(i.id, i.qty - 1)}
-                  className="h-9 w-9 rounded-lg border border-neutral-300 hover:bg-neutral-100"
+                  className="h-11 w-11 rounded-lg border border-neutral-300 hover:bg-neutral-100"
                 >
                   −
                 </button>
@@ -77,13 +77,13 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
                   value={i.qty}
                   aria-label={`Quantity for ${i.name}`}
                   onChange={(e) => setQty(i.id, Number(e.target.value))}
-                  className="h-9 w-16 rounded-lg border border-neutral-300 text-center"
+                  className="h-11 w-16 rounded-lg border border-neutral-300 text-center"
                 />
                 <button
                   type="button"
                   aria-label={`Increase ${i.name}`}
                   onClick={() => setQty(i.id, i.qty + 1)}
-                  className="h-9 w-9 rounded-lg border border-neutral-300 hover:bg-neutral-100"
+                  className="h-11 w-11 rounded-lg border border-neutral-300 hover:bg-neutral-100"
                 >
                   +
                 </button>
@@ -91,7 +91,7 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
               <button
                 type="button"
                 onClick={() => remove(i.id)}
-                className="text-sm text-neutral-500 underline hover:text-red-600"
+                className="min-h-11 text-sm text-neutral-500 underline hover:text-red-600"
               >
                 Remove
               </button>
@@ -101,7 +101,7 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
         <button
           type="button"
           onClick={clear}
-          className="mt-3 text-sm text-neutral-500 underline hover:text-red-600"
+          className="mt-3 min-h-11 text-sm text-neutral-500 underline hover:text-red-600"
         >
           Clear list
         </button>
@@ -117,19 +117,19 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+            className="min-h-11 w-full rounded-lg border border-neutral-300 px-3 py-2"
           />
           <input
             value={business}
             onChange={(e) => setBusiness(e.target.value)}
             placeholder="Business name"
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+            className="min-h-11 w-full rounded-lg border border-neutral-300 px-3 py-2"
           />
           <input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Delivery location"
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+            className="min-h-11 w-full rounded-lg border border-neutral-300 px-3 py-2"
           />
         </div>
         {href ? (
@@ -151,7 +151,7 @@ export function QuoteList({ whatsappNumber }: { whatsappNumber: string | null })
           </p>
         )}
         <details className="mt-6 border-t border-neutral-200 pt-4">
-          <summary className="cursor-pointer font-semibold">
+          <summary className="flex min-h-11 cursor-pointer items-center font-semibold">
             Prefer to send a form instead?
           </summary>
           <EnquiryForm items={items} />

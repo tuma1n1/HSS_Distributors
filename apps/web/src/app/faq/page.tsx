@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Blocks, blocksToText } from "@/components/Blocks";
 import { getFaqs } from "@/lib/content";
+import { jsonLdHtml } from "@/lib/jsonLd";
 
 export const metadata: Metadata = {
   title: "Frequently asked questions",
@@ -10,8 +12,10 @@ export const metadata: Metadata = {
 const LABELS: Record<string, string> = {
   ordering: "Ordering",
   delivery: "Delivery",
-  payment: "Payment",
+  payments: "Payments",
   products: "Products",
+  credit_terms: "Credit terms",
+  general: "General",
 };
 
 export default async function FaqPage() {
@@ -19,7 +23,7 @@ export default async function FaqPage() {
 
   const groups = new Map<string, typeof faqs>();
   for (const f of faqs) {
-    const key = f.category ?? "other";
+    const key = f.group ?? "general";
     groups.set(key, [...(groups.get(key) ?? []), f]);
   }
 
@@ -29,7 +33,7 @@ export default async function FaqPage() {
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: blocksToText(f.answer) },
     })),
   };
 
@@ -38,7 +42,7 @@ export default async function FaqPage() {
       {faqs.length > 0 && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdHtml(jsonLd) }}
         />
       )}
       <h1 className="text-3xl font-bold">Frequently asked questions</h1>
@@ -57,7 +61,9 @@ export default async function FaqPage() {
                   <summary className="cursor-pointer font-semibold marker:text-brand-600">
                     {f.question}
                   </summary>
-                  <p className="mt-2 whitespace-pre-line text-neutral-700">{f.answer}</p>
+                  <div className="mt-2">
+                    <Blocks content={f.answer} />
+                  </div>
                 </details>
               ))}
             </div>

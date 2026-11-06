@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default async function OfficialChannelsPage() {
   const s = await getSiteSettings();
   const wa = whatsappLink(s?.whatsappNumber ?? "", "Hello HSS Distributors, I would like to verify a contact.");
+  const waDisplay = `+${(s?.whatsappNumber ?? "").replace(/^\+/, "")}`;
   const phones = [s?.primaryPhone, s?.secondaryPhone].filter((p): p is string => Boolean(p));
 
   return (
@@ -28,10 +29,10 @@ export default async function OfficialChannelsPage() {
             WhatsApp:{" "}
             {wa ? (
               <a href={wa} target="_blank" rel="noopener noreferrer">
-                +{s.whatsappNumber}
+                {waDisplay}
               </a>
             ) : (
-              `+${s.whatsappNumber}`
+              waDisplay
             )}
           </li>
         )}

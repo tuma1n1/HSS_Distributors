@@ -570,7 +570,7 @@ export interface ApiDeliveryZoneDeliveryZone
     deliveryFee: Schema.Attribute.Decimal;
     estimatedTime: Schema.Attribute.String;
     freeDeliveryThreshold: Schema.Attribute.Decimal;
-    isActive: Schema.Attribute.Boolean;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -703,6 +703,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
+    sizeLabel: Schema.Attribute.String;
+    sizeSort: Schema.Attribute.Decimal;
     sku: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -742,7 +744,7 @@ export interface ApiSiteSettingSiteSetting extends Struct.SingleTypeSchema {
   };
   attributes: {
     address: Schema.Attribute.Text;
-    companyRegNumber: Schema.Attribute.Email;
+    companyRegNumber: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

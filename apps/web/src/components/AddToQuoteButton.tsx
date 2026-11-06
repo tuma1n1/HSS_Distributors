@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useQuote } from "@/lib/quote";
 
 type Props = {
-  product: { documentId: string; slug: string; name: string; packSize?: string | null };
+  product: { documentId: string; slug: string; name: string; packSize?: string | null; sizeLabel?: string | null };
 };
 
 export function AddToQuoteButton({ product }: Props) {
@@ -12,7 +12,7 @@ export function AddToQuoteButton({ product }: Props) {
   const added = ready && has(product.documentId);
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="grid gap-3 sm:flex sm:flex-wrap sm:items-center">
       <button
         type="button"
         onClick={() =>
@@ -20,15 +20,15 @@ export function AddToQuoteButton({ product }: Props) {
             id: product.documentId,
             slug: product.slug,
             name: product.name,
-            packSize: product.packSize,
+            packSize: product.sizeLabel || product.packSize,
           })
         }
-        className="rounded-lg bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
+        className="min-h-11 w-full rounded-lg bg-brand-700 sm:w-auto px-5 py-3 font-semibold text-white hover:bg-brand-900"
       >
-        {added ? "Add one more" : "Add to quote list"}
+        {added ? "Add another" : "Add to quote"}
       </button>
       {added && (
-        <Link href="/quote" className="text-sm font-semibold text-brand-700 hover:underline">
+        <Link href="/quote" className="inline-flex min-h-11 items-center justify-center text-center text-sm font-semibold text-brand-700 hover:underline">
           ✓ Added. View quote list →
         </Link>
       )}

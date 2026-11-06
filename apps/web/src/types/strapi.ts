@@ -35,6 +35,7 @@ export type Category = {
   parent?: Category | null;
   children?: Category[];
   image?: Media | null;
+  sortOrder?: number | null;
 };
 
 export type Product = {
@@ -52,18 +53,25 @@ export type Product = {
   category?: Category | null;
   brand?: Brand | null;
   images?: Media[] | null;
+  description?: unknown;
+  sizeLabel?: string | null;
+  sizeSort?: number | string | null;
+  shelfLifeDays?: number | null;
+  vatTreatment?: "unknown" | "standard" | "zero_rated" | "exempt" | null;
+  isFeatured?: boolean | null;
+  isNew?: boolean | null;
 };
 
 export type Branch = {
   documentId: string;
   name: string;
   slug: string;
-  area?: string | null;
   address?: string | null;
   phone?: string | null;
+  email?: string | null;
   openingHours?: string | null;
   mapUrl?: string | null;
-  isActive: boolean;
+  isMainBranch?: boolean | null;
   sortOrder?: number | null;
 };
 
@@ -71,34 +79,36 @@ export type DeliveryZone = {
   documentId: string;
   name: string;
   slug: string;
-  description?: string | null;
-  areas?: string | null;
+  county?: string | null;
+  wards?: string | null;
   deliveryFee?: number | string | null;
   minimumOrder?: number | string | null;
-  leadTime?: string | null;
-  isActive: boolean;
+  freeDeliveryThreshold?: number | string | null;
+  cutOffTime?: string | null;
+  estimatedTime?: string | null;
+  notes?: string | null;
+  isActive?: boolean | null;
   sortOrder?: number | null;
 };
 
 export type Faq = {
   documentId: string;
   question: string;
-  answer: string;
-  category?: string | null;
+  answer: unknown; // Strapi blocks
+  group?: "ordering" | "delivery" | "payments" | "products" | "credit_terms" | "general" | null;
   sortOrder?: number | null;
 };
 
 export type PaymentMethod = {
   id: number;
-  type: "bank" | "paybill" | "till";
-  label?: string | null;
+  label: string;
+  methodType?: "paybill" | "till" | "bank_transfer" | null;
+  businessNumber?: string | null;
+  accountNumber?: string | null;
   accountName?: string | null;
   bankName?: string | null;
   branchName?: string | null;
-  accountNumber?: string | null;
-  paybillNumber?: string | null;
-  tillNumber?: string | null;
-  instructions?: string | null;
+  notes?: string | null;
 };
 
 export type SiteSetting = {

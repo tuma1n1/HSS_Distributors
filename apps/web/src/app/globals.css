@@ -10,9 +10,61 @@
   --color-gold-500: #c9a227;
   --color-gold-600: #a9871c;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background: #ffffff;
   color: #171717;
+}
+
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 2px;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+.bump {
+  animation: bump 0.35s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise, .bump { animation: none; }
+}
+
+/* Manufacturer belt */
+@keyframes belt {
+  to { transform: translateX(-100%); }
+}
+.belt { overflow: hidden; }
+.belt-track { animation: belt 45s linear infinite; }
+.belt:hover .belt-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .belt { overflow-x: auto; }
+  .belt-track { animation: none; }
+  .belt-track[aria-hidden] { display: none; }
 }

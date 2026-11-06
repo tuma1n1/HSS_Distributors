@@ -34,8 +34,8 @@ export default async function DeliveryPage() {
           {zones.map((z) => (
             <article key={z.documentId} className="rounded-xl border border-neutral-200 p-5">
               <h2 className="text-lg font-bold">{z.name}</h2>
-              {z.description && <p className="mt-2 text-sm text-neutral-600">{z.description}</p>}
-              {z.areas && <p className="mt-3 whitespace-pre-line text-sm">{z.areas}</p>}
+              {z.county && <p className="mt-1 text-sm text-brand-700">{z.county}</p>}
+              {z.wards && <p className="mt-3 whitespace-pre-line text-sm">{z.wards}</p>}
               <dl className="mt-4 space-y-1 text-sm">
                 <div className="flex justify-between gap-4">
                   <dt className="text-neutral-500">Delivery fee</dt>
@@ -45,13 +45,26 @@ export default async function DeliveryPage() {
                   <dt className="text-neutral-500">Minimum order</dt>
                   <dd className="font-medium">{money(z.minimumOrder) ?? "Confirmed on quote"}</dd>
                 </div>
-                {z.leadTime && (
+                {money(z.freeDeliveryThreshold) && (
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-neutral-500">Free delivery from</dt>
+                    <dd className="font-medium">{money(z.freeDeliveryThreshold)}</dd>
+                  </div>
+                )}
+                {z.cutOffTime && (
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-neutral-500">Order cut-off</dt>
+                    <dd className="font-medium">{z.cutOffTime}</dd>
+                  </div>
+                )}
+                {z.estimatedTime && (
                   <div className="flex justify-between gap-4">
                     <dt className="text-neutral-500">Lead time</dt>
-                    <dd className="font-medium">{z.leadTime}</dd>
+                    <dd className="font-medium">{z.estimatedTime}</dd>
                   </div>
                 )}
               </dl>
+              {z.notes && <p className="mt-3 whitespace-pre-line text-sm text-neutral-600">{z.notes}</p>}
             </article>
           ))}
         </div>
@@ -62,7 +75,7 @@ export default async function DeliveryPage() {
           href={wa}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 inline-block rounded-lg bg-gold-500 px-6 py-3 font-semibold text-brand-900 hover:bg-gold-400"
+          className="mt-8 inline-flex min-h-11 items-center justify-center rounded-lg text-center bg-gold-500 px-6 py-3 font-semibold text-brand-900 hover:bg-gold-400"
         >
           Ask about your location
         </a>

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { hasPrice } from "@/lib/format";
 import { strapiFetch } from "@/lib/strapi";
 import type { StrapiList } from "@/types/strapi";
 
@@ -48,6 +49,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/privacy",
     "/terms",
     "/official-channels",
+    "/official-payment-details",
+    "/for/dukas-and-retailers",
+    "/for/hotels-and-restaurants",
+    "/for/schools-and-institutions",
+    "/for/supermarkets-and-wholesalers",
     "/report-scam",
     "/become-a-supplier",
   ];
@@ -66,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })),
     ...products
-      .filter((p) => p.price != null && p.shortDescription)
+      .filter((p) => hasPrice(p.price) && p.shortDescription)
       .map((p) => ({
         url: `${BASE}/product/${p.slug}`,
         lastModified: p.updatedAt ? new Date(p.updatedAt) : now,

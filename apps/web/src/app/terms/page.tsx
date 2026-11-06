@@ -1,93 +1,89 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { InfoPage } from "@/components/InfoPage";
-import { getSiteSettings } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Terms of use",
-  description: "Terms for using the HSS Distributors website and requesting quotes.",
+  title: "Terms of Service",
+  description: "Terms of Service for hssdistributors.co.ke and the services of HSS Distributors Limited.",
   alternates: { canonical: "/terms" },
 };
 
-const UPDATED = "19 October 2026";
-
-export default async function TermsPage() {
-  const s = await getSiteSettings();
-  const name = s?.legalName || "HSS Distributors";
-
+export default function TermsPage() {
   return (
-    <InfoPage
-      title="Terms of use"
-      updated={UPDATED}
-      intro={`These terms apply when you use the ${name} website and request quotes from us.`}
-    >
-      <h2>Using this website</h2>
+    <InfoPage title="Terms of Service" effective="4 November 2026">
+      <h2>Preamble</h2>
       <p>
-        This website is a catalogue and enquiry tool. It does not take online
-        payments and does not create customer accounts. By using it, you agree to
-        these terms.
+        Please read these Terms of Service (“Terms”) carefully before using hssdistributors.co.ke (“the Site”)
+        operated by HSS Company. These Terms of Service govern your use of our services, website, WhatsApp
+        Business, social media pages, offices and all platforms operated by HSS Distributors Limited.
+      </p>
+      <p>
+        By accessing or using the Site, instructing us and/or providing your personal data, you agree to be bound
+        by these Terms and <Link href="/privacy">Privacy Policy</Link>. If you do not agree with the Terms, please
+        do not access the Site or use our services.
+      </p>
+      <p>This document is governed by the Laws of Kenya.</p>
+
+      <h2>Definitions</h2>
+      <ul>
+        <li>“Client” means any person who instructs the Firm.</li>
+        <li>“User” means any visitor to the website or social media.</li>
+        <li>“Personal Data” has the meaning under Section 2, Data Protection Act No. 24 of 2019.</li>
+      </ul>
+
+      <h2>1. Intellectual Property</h2>
+      <p>
+        All content on this Site, including text, graphics, logos, images, design elements, digital downloads,
+        audio clips and underlying code, is the property of hssdistributors.co.ke and its content suppliers and is
+        protected by the Trademarks Act (Cap. 506), the Copyright Act (Cap. 130, Laws of Kenya) and intellectual
+        property laws. You may not copy, reproduce, modify, display, distribute or create derivative works from any
+        content on this Site without our express prior written consent.
       </p>
 
-      <h2>Quotes and orders</h2>
+      <h2>2. Acceptable Use</h2>
       <p>
-        Adding items to your quote list and sending it to us is a request for a
-        quote, not an order. An order is confirmed only when we confirm availability,
-        price and delivery arrangements with you directly.
+        You agree to use the Site only for lawful purposes and in compliance with the Computer Misuse and
+        Cybercrimes Act, 2018, in a manner that does not infringe, restrict the rights of, or inhibit anyone else’s
+        use and enjoyment of the Site. You are strictly prohibited from:
+      </p>
+      <ul>
+        <li>Using the Site in a manner that damages, disables, overburdens or disrupts its performance;</li>
+        <li>Engaging in any automated data collection, including mining, scraping or harvesting data;</li>
+        <li>Using the Site to transmit or distribute malicious software, spam or offensive content;</li>
+        <li>Using the Site to send unsolicited commercial communications, spam or offensive material;</li>
+        <li>Attempting to gain unauthorized access to any portion of the Site, user accounts or computer systems connected to the Site.</li>
+      </ul>
+
+      <h2>3. Limitation of Liability</h2>
+      <p>
+        The information on this Site is provided on an “as is” and “as available” basis. While we strive for
+        accuracy, we make no warranties or representations about the completeness or reliability of the content,
+        either express or implied. To the fullest extent permitted by law, hssdistributors.co.ke and its
+        affiliates, directors, officers and employees will not be held liable for any direct, indirect, incidental,
+        special or consequential damages resulting from your use or inability to use this Site, including but not
+        limited to loss of profits, data or business interruptions.
       </p>
 
-      <h2>Prices and availability</h2>
+      <h2>4. Third-party Links</h2>
       <p>
-        Prices, pack sizes and stock status can change without notice. Where a
-        product shows “Price on request” or “Out of stock”, please contact us for
-        the latest information. We may correct errors on the website at any time.
+        Our Site may contain links to external websites, services and/or advertisements that are not operated, owned
+        or controlled by us. We have no control over and assume no responsibility for the content, privacy policies
+        and/or practices of any third-party websites. By using this Site, you acknowledge that we are not responsible
+        or liable for any damage or loss caused by your use of a third-party platform.
       </p>
 
-      <h2>Payment</h2>
+      <h2>5. Governing Law</h2>
       <p>
-        Pay only to the official payment details published on our{" "}
-        <a href="/official-payment-details">official payment details</a> page or
-        confirmed to you directly by us. We are not responsible for payments made
-        to any other account or number.
+        These Terms are governed by and construed in accordance with the laws of the Republic of Kenya. Any disputes
+        and/or legal actions arising under these Terms shall be subject to the exclusive jurisdiction of the
+        competent Courts within Kenya.
       </p>
 
-      <h2>Delivery</h2>
+      <h2>6. Changes to These Terms</h2>
       <p>
-        Delivery fees and lead times depend on your location and order size and are
-        confirmed in your quote.
-      </p>
-
-      <h2>Damaged, missing or incorrect goods</h2>
-      <p>
-        Please check your goods on delivery and tell us as soon as possible if
-        anything is damaged, missing or incorrect. We will review each case in line
-        with the terms confirmed in your quote.
-      </p>
-
-      <h2>Product information</h2>
-      <p>
-        Product names, descriptions and images are provided for identification.
-        Brand names and logos belong to their owners. We take care to keep
-        information accurate, but packaging and specifications may change.
-      </p>
-
-      <h2>Our responsibility</h2>
-      <p>
-        We provide this website “as is”. To the extent the law allows, we are not
-        liable for losses arising from your use of the website or from reliance on
-        information that is out of date or incorrect.
-      </p>
-
-      <h2>Governing law</h2>
-      <p>These terms are governed by the laws of Kenya.</p>
-
-      <h2>Changes</h2>
-      <p>
-        We may update these terms from time to time. The date at the top of this
-        page shows when they were last changed.
-      </p>
-
-      <h2>Contact</h2>
-      <p>
-        Questions about these terms? See our <a href="/contact">contact page</a>.
+        We reserve the right to modify and/or replace these Terms at any time, at our sole discretion. Any changes
+        will be posted on this page with an updated effective date. Continued use of this Site after changes are
+        made constitutes acceptance of the new Terms.
       </p>
     </InfoPage>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MANUFACTURERS } from "@/lib/manufacturers";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -44,6 +45,26 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-10">
+        <h2 className="text-xl font-bold">Manufacturers we distribute for</h2>
+        <p className="mt-3 text-neutral-700">We distribute all the products these manufacturers make.</p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {MANUFACTURERS.map((m) => (
+            <li key={m.name} className="rounded-xl border border-neutral-200 p-4 font-medium">
+              {m.name}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-bold">Find us</h2>
+        <p className="mt-3 text-neutral-700">
+          Our office is at ICD Business Park, No. 11, Nairobi.{" "}
+          <Link href="/contact" className="font-semibold text-brand-700 underline">Get in touch</Link>.
+        </p>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-xl font-bold">Part of HSS Prime Group</h2>
         <p className="mt-3 text-neutral-700">
           HSS Distributors is part of{" "}
@@ -62,13 +83,13 @@ export default function AboutPage() {
       <div className="mt-10 flex flex-wrap gap-3">
         <Link
           href="/catalogue"
-          className="rounded-lg bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg text-center bg-brand-700 px-5 py-3 font-semibold text-white hover:bg-brand-900"
         >
           Browse catalogue
         </Link>
         <Link
           href="/how-to-order"
-          className="rounded-lg border border-brand-700 px-5 py-3 font-semibold text-brand-700 hover:bg-brand-50"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg text-center border border-brand-700 px-5 py-3 font-semibold text-brand-700 hover:bg-brand-50"
         >
           How to order
         </Link>
