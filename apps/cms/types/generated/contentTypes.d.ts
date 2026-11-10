@@ -666,6 +666,39 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiManufacturerManufacturer
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'manufacturers';
+  info: {
+    displayName: 'Manufacturer';
+    pluralName: 'manufacturers';
+    singularName: 'manufacturer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::manufacturer.manufacturer'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    sortOrder: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website: Schema.Attribute.String;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -705,9 +738,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       }>;
     sizeLabel: Schema.Attribute.String;
     sizeSort: Schema.Attribute.Decimal;
-    sku: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    sku: Schema.Attribute.String & Schema.Attribute.Unique;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
     stockStatus: Schema.Attribute.Enumeration<
       ['out_of_stock', 'in_stock', 'low_stock', 'call_to_confirm']
@@ -1294,6 +1325,7 @@ declare module '@strapi/strapi' {
       'api::delivery-zone.delivery-zone': ApiDeliveryZoneDeliveryZone;
       'api::enquiry.enquiry': ApiEnquiryEnquiry;
       'api::faq.faq': ApiFaqFaq;
+      'api::manufacturer.manufacturer': ApiManufacturerManufacturer;
       'api::product.product': ApiProductProduct;
       'api::site-setting.site-setting': ApiSiteSettingSiteSetting;
       'plugin::content-releases.release': PluginContentReleasesRelease;

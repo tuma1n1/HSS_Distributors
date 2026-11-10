@@ -22,8 +22,9 @@ export const metadata: Metadata = {
   },
   description:
     "HSS Distributors supplies FMCG products wholesale in Nairobi. Browse the catalogue and request a quote on WhatsApp.",
-  metadataBase: 
-    new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  applicationName: "HSS Distributors",
+  openGraph: { siteName: "HSS Distributors", type: "website", locale: "en_KE" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

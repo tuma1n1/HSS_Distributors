@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const card = "rounded-xl border border-neutral-200 p-5";
+/** What Google Maps searches for. Swap in "lat,lng" (e.g. "-1.3192,36.8530") to pin the exact building. */
+const MAP_QUERY = "ICD Business Park, Nairobi, Kenya";
+
+const card ="rounded-xl border border-neutral-200 p-5";
 const label = "text-sm font-semibold text-brand-700";
 const contactLink = "flex min-h-11 items-center [overflow-wrap:anywhere] hover:underline";
 
@@ -85,6 +88,34 @@ export default async function ContactPage() {
           <ContactForm email={s.salesEmail ?? "sales@hssdistributors.co.ke"} />
         </section>
       </div>
+
+      <section aria-labelledby="map-heading" className="mt-12">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 id="map-heading" className="text-xl font-bold text-brand-900">Find our office</h2>
+            <p className="mt-1 text-neutral-600">ICD Business Park, No. 11, Nairobi</p>
+          </div>
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAP_QUERY)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-brand-700 px-5 text-center font-semibold text-brand-700 hover:bg-brand-50 sm:w-auto"
+          >
+            Get directions
+          </a>
+        </div>
+        {/* Fixed aspect ratio so the page never jumps while the map loads; capped height on wide screens. */}
+        <div className="mt-4 aspect-[4/3] max-h-[480px] w-full overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 sm:aspect-[16/9]">
+          <iframe
+            title="Map showing HSS Distributors at ICD Business Park, Nairobi"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=16&output=embed`}
+            className="h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+      </section>
     </div>
   );
 }

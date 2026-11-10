@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { QuoteLink } from "@/components/QuoteLink";
 import { getNavCategories } from "@/lib/content";
@@ -63,15 +64,10 @@ export async function Header() {
 
       {/* Main bar */}
       <div className="relative border-b border-neutral-200 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:gap-6">
-          <Link href="/" className="flex min-h-11 shrink-0 items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-700 font-display text-sm font-extrabold text-gold-400">
-              HSS
-            </span>
-            <span className="font-display text-lg font-extrabold leading-none text-brand-900">
-              Distributors
-              <span className="mt-0.5 block text-xs font-medium text-brand-600">HSS Prime Group</span>
-            </span>
+        <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2 sm:gap-6">
+          <Link href="/" aria-label="HSS Distributors home" className="flex shrink-0 items-center rounded-lg">
+            {/* 52px tall with py-2 keeps the bar at its old height, so the sticky catalogue bar stays aligned. */}
+            <Image src="/logo.png" alt="HSS Distributors" width={508} height={277} preload className="h-[52px] w-auto" />
           </Link>
 
           {/* Desktop navigation */}

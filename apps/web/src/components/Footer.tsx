@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/site";
 import { getTopCategories } from "@/lib/shelf";
@@ -83,10 +84,10 @@ export async function Footer() {
       {/* Columns */}
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-12 lg:grid-cols-5">
         <div className="col-span-2 lg:col-span-1">
-          <p className="font-display text-xl font-semibold text-white">
-            HSS Distributors
-          </p>
-          <p className="mt-2 text-sm text-brand-100/80">
+          <Link href="/" aria-label="HSS Distributors home" className="inline-block rounded-xl bg-white p-2">
+            <Image src="/logo.png" alt="HSS Distributors" width={508} height={277} className="h-16 w-auto" />
+          </Link>
+          <p className="mt-4 text-sm text-brand-100/80">
             Wholesale FMCG distribution in Nairobi. A member of{" "}
             <a
               href="https://hssprimegroupltd.co.ke"

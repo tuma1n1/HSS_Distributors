@@ -63,11 +63,13 @@ export default async function HomePage() {
   const wa = whatsappLink(settings?.whatsappNumber ?? "", "Hello HSS Distributors, I would like to place an order.");
   const orderHref = wa ?? "/contact";
 
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "HSS Distributors",
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    url: siteUrl,
+    logo: `${siteUrl}/web-logo.png`,
     parentOrganization: { "@type": "Organization", name: "HSS Prime Group" },
     telephone: settings.primaryPhone || undefined,
     email: settings.salesEmail || undefined,
@@ -77,6 +79,13 @@ export default async function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(jsonLd) }} />
+      {/* Tells Google the site name to show above organic results. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdHtml({ "@context": "https://schema.org", "@type": "WebSite", name: "HSS Distributors", url: siteUrl }),
+        }}
+      />
 
       {/* Hero */}
       <section className="bg-brand-900 text-white">
